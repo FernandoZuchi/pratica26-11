@@ -52,10 +52,12 @@ Copiar código
   "start": "node src/app.js",
   "dev": "nodemon src/app.js"
 }
+```
+
 Passo 2: Configurar o Servidor
 Criar o arquivo principal src/app.js:
-javascript
-Copiar código
+
+```javascript
 const express = require('express');
 const cors = require('cors');
 const app = express();
