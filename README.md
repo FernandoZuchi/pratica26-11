@@ -1,23 +1,14 @@
-1. Planejamento do Projeto
-Duração: 1 dia
-Objetivo: Definir a arquitetura do projeto, ferramentas, e criar o ambiente de desenvolvimento.
+### Arquitetura do Projeto
 
-Arquitetura do Projeto
+- Frontend: React.js com Vite para inicialização rápida.
+- Backend: Node.js com Express.
+- Banco de Dados: SQLite (armazenamento local simples e eficiente).
+- Design: Responsivo, usando CSS/SCSS ou frameworks como Tailwind CSS.
+- Controle de versão: Git e GitHub para colaboração.
+- Ferramentas adicionais: Figma para design, Postman para testes de API.
 
-Frontend: React.js com Vite para inicialização rápida.
-Backend: Node.js com Express.
-Banco de Dados: SQLite (armazenamento local simples e eficiente).
-Design: Responsivo, usando CSS/SCSS ou frameworks como Tailwind CSS.
-Controle de versão: Git e GitHub para colaboração.
-Ferramentas adicionais: Figma para design, Postman para testes de API.
-Configuração do Ambiente
-
-Instalar Node.js e configurar o gerenciador de pacotes (npm ou yarn).
-Instalar SQLite e ferramentas de administração, como DB Browser for SQLite.
-Estrutura do Repositório
-
-java
-Copiar código
+### Estrutura do Repositório
+```prompt
 comercio/
 ├── frontend/
 │   ├── src/
@@ -35,21 +26,27 @@ comercio/
 ├── README.md
 ├── .gitignore
 └── .env
-2. Desenvolvimento do Backend
-Duração: 3 dias
+```
+
+### Desenvolvimento do Backend
+
 Objetivo: Criar a API para gerenciar produtos, serviços e contatos.
 
-Passo 1: Inicializar o Projeto
+#### Inicializar o Projeto
+
 Criar o projeto do backend:
-bash
-Copiar código
+
+```
 mkdir backend
 cd backend
 npm init -y
 npm install express sqlite3 cors dotenv
 npm install --save-dev nodemon
+```
+
 Adicionar scripts no package.json:
-json
+
+```json
 Copiar código
 "scripts": {
   "start": "node src/app.js",
@@ -69,11 +66,12 @@ app.use(express.json());
 app.listen(3001, () => {
     console.log('Servidor rodando na porta 3001');
 });
-Passo 3: Configurar Banco de Dados
+```
+
+### Configurar Banco de Dados
 Criar o arquivo src/database.js:
 
-javascript
-Copiar código
+```javascript
 const sqlite3 = require('sqlite3').verbose();
 
 const db = new sqlite3.Database('./database.sqlite', (err) => {
@@ -82,10 +80,11 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
 });
 
 module.exports = db;
+```
+
 Criar tabelas:
 
-javascript
-Copiar código
+```javascript
 const db = require('./database');
 
 db.serialize(() => {
@@ -99,11 +98,12 @@ db.serialize(() => {
         )
     `);
 });
-Passo 4: Criar Rotas
+```
+
+### Criar Rotas
 Criar rota para listar produtos:
 
-javascript
-Copiar código
+```
 const express = require('express');
 const router = express.Router();
 const db = require('../database');
@@ -116,30 +116,31 @@ router.get('/products', (req, res) => {
 });
 
 module.exports = router;
+```
+
 Integrar rotas no app.js:
 
-javascript
-Copiar código
+```javascript
 const productRoutes = require('./routes/products');
 app.use('/api', productRoutes);
-3. Desenvolvimento do Frontend
-Duração: 4 dias
+```
+
+### Desenvolvimento do Frontend
 Objetivo: Criar a interface do usuário e consumir a API.
 
-Passo 1: Inicializar o Projeto
+#### Inicializar o Projeto
 Criar o projeto React:
 
-bash
-Copiar código
+```prompt
 mkdir frontend
 cd frontend
 npm create vite@latest .
 npm install
 npm install axios react-router-dom
-Estruturar o diretório src:
+```
 
-css
-Copiar código
+Estruturar o diretório src:
+```prompt
 src/
 ├── components/
 │   ├── ProductCard.jsx
@@ -148,11 +149,12 @@ src/
 │   ├── Contact.jsx
 ├── App.jsx
 └── main.jsx
-Passo 2: Criar Componentes
+```
+
+#### Criar Componentes
 ProductCard.jsx:
 
-javascript
-Copiar código
+```javascript
 import React from 'react';
 
 const ProductCard = ({ product }) => (
@@ -165,10 +167,11 @@ const ProductCard = ({ product }) => (
 );
 
 export default ProductCard;
+```
+
 Home.jsx:
 
-javascript
-Copiar código
+```javascript
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
@@ -195,10 +198,11 @@ const Home = () => {
 };
 
 export default Home;
+```
+
 Criar navegação no App.jsx:
 
-javascript
-Copiar código
+```javascript
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
@@ -214,34 +218,38 @@ const App = () => (
 );
 
 export default App;
-4. Design Responsivo
-Duração: 2 dias
-Objetivo: Garantir que o site funcione em dispositivos móveis e desktops.
+```
+
+#### Design Responsivo e Estilização
+Objetivo: Garantir que o site funcione em diversos dispositivos e seja bem estilizado
 
 Configurar Tailwind CSS:
 
-bash
-Copiar código
+```prompt
 npm install -D tailwindcss
 npx tailwindcss init
+```
+
 Adicionar classes responsivas ao CSS dos componentes.
 
-5. Testes e Finalização
-Duração: 2 dias
+
+### Testes e Finalização
 Objetivo: Testar o sistema e corrigir bugs.
 
-Testar o Backend
+#### Testar o Backend
 
-Testar endpoints com Postman.
-Garantir que o banco de dados está persistindo corretamente.
-Testar o Frontend
+- Testar endpoints com Postman.
+- Garantir que o banco de dados está persistindo corretamente.
 
-Verificar responsividade em diferentes dispositivos.
-Garantir que as requisições à API estão funcionando.
-6. Deploy
-Duração: 1 dia
+#### Testar o Frontend
+
+- Verificar responsividade em diferentes dispositivos.
+- Garantir que as requisições à API estão funcionando.
+
+
+### Deploy
 Objetivo: Hospedar o projeto.
 
-Frontend: Deploy no Vercel.
-Backend: Deploy no Render ou Railway.
-Banco de Dados: Usar arquivo SQLite no backend.
+- Frontend: Deploy no Vercel.
+- Backend: Deploy no Render ou Railway.
+- Banco de Dados: Usar arquivo SQLite no backend.
