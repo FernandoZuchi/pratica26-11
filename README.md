@@ -105,7 +105,7 @@ db.serialize(() => {
 ### Criar Rotas
 Criar rota para listar produtos:
 
-```
+```javascript
 const express = require('express');
 const router = express.Router();
 const db = require('../database');
